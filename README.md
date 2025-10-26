@@ -1,4 +1,4 @@
-# CSU Coursework Archive
+# Coursework Archive
 
 Personal record of my programming coursework and exercises at TCD.
 
@@ -6,5 +6,8 @@ Personal record of my programming coursework and exercises at TCD.
 
 #Algorithms and Data Structures 2025/2026
 
+#data analysis
+
+#management science
 
 tbc
