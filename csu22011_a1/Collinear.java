@@ -1,0 +1,235 @@
+package csu22011_a1;
+import java.io.File;
+import java.util.Scanner;
+
+// -------------------------------------------------------------------------
+/**
+ * This class contains only two static methods that search for points on the
+ * same line in three arrays of integers.
+ *
+ * @author
+ * @version 03/10/22 22:22:52
+ */
+
+/*
+ * Array Size of 1000 (0.42 seconds) - countCollinear (0.09 seconds) -
+ * countCollinearFast
+ * 
+ * Array Size of 2000 (2.73 seconds) - countCollinear (0.35 seconds) -
+ * countCollinearFast
+ * 
+ * Array Size of 4000 (17.80 seconds) - countCollinear (1.55 seconds) -
+ * countCollinearFast
+ * 
+ * Array Size of 5000 (65.02 seconds) - countCollinear (4.81 seconds) -
+ * countCollinearFast
+ */
+
+class Collinear {
+
+	public static int Y1 = 1;
+	public static int Y2 = 2;
+	public static int Y3 = 3;
+
+	
+    public static void main(String[] args) {
+        try {
+            int numOfCycles = 4;
+            int[] arraySizes = {1000, 2000, 4000, 5000};
+
+            for (int cycle = 0; cycle < numOfCycles; cycle++) {
+                int arraySize = arraySizes[cycle];
+
+                String basePath = "csu22011_a1/input-files/";
+                String file1 = basePath + "r0" + arraySize + "-1.txt";
+                String file2 = basePath + "r0" + arraySize + "-2.txt";
+                String file3 = basePath + "r0" + arraySize + "-3.txt";
+
+                int[] a = loadIntsToArray(file1, arraySize);
+                int[] b = loadIntsToArray(file2, arraySize);
+                int[] c = loadIntsToArray(file3, arraySize);
+
+                System.out.println("Array Size of " + arraySize);
+
+                Stopwatch timer = new Stopwatch();
+                Collinear.countCollinear(a, b, c);
+                double time = timer.elapsedTime();
+                System.out.printf("(%.2f seconds) - countCollinear\n", time);
+
+                timer = new Stopwatch();
+                Collinear.countCollinearFast(a, b, c);
+                time = timer.elapsedTime();
+                System.out.printf("(%.2f seconds) - countCollinearFast\n\n", time);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    static class Stopwatch {
+        private final long start;
+
+        public Stopwatch() {
+            start = System.nanoTime();
+        }
+
+        public double elapsedTime() {
+            long now = System.nanoTime();
+            return (now - start) / 1.0e9;
+        }
+    }
+		
+		private static int[] loadIntsToArray(String fileLocation, int arraySize)
+		{
+			int[] array = new int[arraySize];
+			try {
+		        Scanner in = new Scanner(new File(fileLocation));
+		        int index = 0;
+		        while (in.hasNextInt()) {
+		            array[index] = in.nextInt();
+		            index++;
+		        }
+		        in.close(); 
+		    }
+	        catch (Exception e) {
+	        	throw new ArithmeticException("Error loading Array");
+	        }
+			return array;
+		}
+		
+
+	// ----------------------------------------------------------
+	/**
+	 * Counts for the number of non-hoizontal lines that go through 3 points in
+	 * arrays a1, a2, a3. This method is static, thus it can be called as
+	 * Collinear.countCollinear(a1,a2,a3)
+	 * 
+	 * @param a1:
+	 *            An UNSORTED array of integers. Each integer a1[i] represents
+	 *            the point (a1[i], 1) on the plain.
+	 * @param a2:
+	 *            An UNSORTED array of integers. Each integer a2[i] represents
+	 *            the point (a2[i], 2) on the plain.
+	 * @param a3:
+	 *            An UNSORTED array of integers. Each integer a3[i] represents
+	 *            the point (a3[i], 3) on the plain.
+	 * @return the number of points which are collinear and do not lie on a
+	 *         horizontal line.
+	 *
+	 *         Array a1, a2 and a3 contain points on the horizontal line y=1,
+	 *         y=2 and y=3, respectively. A non-horizontal line will have to
+	 *         cross all three of these lines. Thus we are looking for 3 points,
+	 *         each in a1, a2, a3 which lie on the same line.
+	 *
+	 *         Three points (x1, y1), (x2, y2), (x3, y3) are collinear (i.e.,
+	 *         they are on the same line) if
+	 * 
+	 *         x1(y2-y3)+x2(y3-y1)+x3(y1-y2)=0
+	 *
+	 *         In our case y1=1, y2=2, y3=3.
+	 *
+	 *         You should implement this using a BRUTE FORCE approach (check all
+	 *         possible combinations of numbers from a1, a2, a3) which should run
+   *         in the worst case in O(N^3).
+	 *
+	 */
+	static int countCollinear(int[] a1, int[] a2, int[] a3) {
+		int count = 0;
+		for (int i = 0; i < a1.length; i++) 
+			 for (int j = 0; j < a2.length; j++)
+			 for (int k = 0; k < a3.length; k++)
+			 if (-a1[i] + 2 * a2[j] - a3[k] == 0)
+			 count++;
+		return count;
+	}
+
+	// ----------------------------------------------------------
+	/**
+	 * Counts for the number of non-hoizontal lines that go through 3 points in
+	 * arrays a1, a2, a3. This method is static, thus it can be called as
+	 * Collinear.countCollinearFast(a1,a2,a3)
+	 * 
+	 * @param a1:
+	 *            An UNSORTED array of integers. Each integer a1[i] represents
+	 *            the point (a1[i], 1) on the plain.
+	 * @param a2:
+	 *            An UNSORTED array of integers. Each integer a2[i] represents
+	 *            the point (a2[i], 2) on the plain.
+	 * @param a3:
+	 *            An UNSORTED array of integers. Each integer a3[i] represents
+	 *            the point (a3[i], 3) on the plain.
+	 * @return the number of points which are collinear and do not lie on a
+	 *         horizontal line.
+	 *
+	 *         In this implementation you should make non-trivial use of
+	 *         InsertionSort and Binary Search. This method should run in the
+   *         worst case in O(N^2 lg(N)).
+	 *
+	 */
+	static int countCollinearFast(int[] a1, int[] a2, int[] a3) {
+		int count = 0;
+		sort(a3);
+		for(int i = 0; i< a1.length; i++) {
+			for(int j =0; j< a2.length;j++) {
+				int x3 = -a1[i] + 2*a2[j];
+				if (binarySearch(a3,x3)) {
+					count++;
+				}
+			}
+		}
+		return count;
+
+	}
+
+	// ----------------------------------------------------------
+	/**
+	 * Sorts an array of integers according to InsertionSort. This method is
+	 * static, thus it can be called as Collinear.sort(a)
+	 * 
+	 * @param a:
+	 *            An UNSORTED array of integers.
+	 * @return after the method returns, the array must be in ascending sorted
+	 *         order.
+   *
+   * This method runs in the worst case in Theta(N^2) time.
+	 */
+  static void sort(int[] a) {
+    for(int i = 0; i < a.length; i++){
+      int j = i-1;
+      while(j >= 0 && a[j]>a[j+1]){
+        int temp = a[j];
+        a[j] = a[j+1];
+        a[j+1] = temp;
+        j--;
+      }				
+    }
+  }
+
+	// ----------------------------------------------------------
+	/**
+	 * Searches for an integer inside an array of integers. This method is
+	 * static, thus it can be called as Collinear.binarySearch(a,x)
+	 * 
+	 * @param a:
+	 *            A array of integers SORTED in ascending order.
+	 * @param x:
+	 *            An integer.
+	 * @return true if 'x' is contained in 'a'; false otherwise.
+   * 
+   * This method runs in the worst case in Theta(lg(N)) time.
+	 *
+	 */
+  static boolean binarySearch(int[] a, int x) {
+    int lo = 0, hi = a.length-1;
+    while (lo <= hi)
+    {
+      int mid = lo + (hi - lo) / 2;
+      if (x < a[mid]) hi = mid - 1;
+      else if (x > a[mid]) lo = mid + 1;
+      else return true;
+    }
+    return false;
+  }
+
+}
