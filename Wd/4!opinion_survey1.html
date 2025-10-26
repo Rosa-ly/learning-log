@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opinion Survey</title>
+    <style>
+        body {
+            background-color: #CCFFCC;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding-top: 60px;
+        }
+        .auto-style1 {
+            text-align: center;
+        }
+        .auto-style2 {
+            text-align: left;
+        }
+        table {
+            margin: 20px auto;
+            width: 60%;
+            border-spacing: 0;
+        }
+        td {
+            padding: 10px;
+        }
+        form {
+            margin: 0;
+        }
+    .auto-style3 {
+		color: #808080;
+	}
+	.auto-style4 {
+		text-align: left;
+		color: #808080;
+	}
+    .auto-style5 {
+	width: 80%;
+	margin: auto;
+	text-align: center;
+}
+        .bold {
+            font-weight: bold;
+        }
+        .accessible {
+		background-color: #000000;
+		color: #CCFFCC;
+		font-size: 1.5em;
+	}
+   }
+    .auto-style4 {
+		text-align: left;
+	}
+    .auto-style6 {
+		text-align: center;
+		margin-left: 40px;
+	}
+    </style>
+    <script>
+        function toggleAccessibility() {
+            document.body.classList.toggle('accessible');
+        }
+    </script>
+
+    <script>
+        function updateCheckbox(checkbox) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach((cb) => {
+                if (cb !== checkbox) {
+                    cb.checked = false;
+                    cb.parentElement.classList.remove('bold');
+                }
+            });
+            if (checkbox.checked) {
+                checkbox.parentElement.classList.add('bold');
+            } else {
+                checkbox.parentElement.classList.remove('bold');
+            }
+        }
+    </script>
+</head>
+<body style="margin-left:0px; margin-right: 0px; margin-bottom: 1px">
+    <div class="navbar">
+        <a href="My hometown.html">Home</a>
+        <a href="effects.html">Effects of Environmental Changes</a>
+        <a href="actions.html">Actions</a>
+        <a href="4!opinion_survey1.html">Survey</a> <br />
+    </div>
+
+    <div class="content">
+       <button onclick="toggleAccessibility()" style="width: 382px; height: 99px">
+	   <div class="auto-style6">
+		   <p>Difficult to read? Click me!</p>
+	   </div>
+		</button>
+        <div class="auto-style5">
+		<a href="javascript:history.back()" class="auto-style2">Back</a><span lang="zh-cn">&nbsp;
+			</span>
+        <img alt="Back" class="auto-style1" height="88" src="3dd172a3_E839090_a2b11036_small.png" width="109" /><span lang="zh-cn">
+			</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			<img alt="foreard" class="auto-style7" height="88" src="right.png" width="109" />&nbsp;
+		<a href="javascript:history.forward()">Forward</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h2 class="auto-style1">Public Opinion Survey on Climate Change</h2>
+            <form method="post" action="mailto:liur3@tcd.com">
+                <table>
+                    <tr>
+           <td class="auto-style2" colspan="2" style="height: 45px">
+		<span class="auto-style3" lang="zh-cn">Personal Information</span></td>
+                    </tr>
+                    <tr><td class="auto-style1" style="height: 130px; width: 267px">Gender</td>
+                        <td class="auto-style2" style="height: 130px">
+                           <label>Select <span lang="zh-cn">o</span>ne:</label><br>
+            <label>
+                <input type="checkbox" onclick="updateCheckbox(this)">Female</label><br>
+            <label>
+                <input type="checkbox" onclick="updateCheckbox(this)">Male</label><br>
+            <label>
+                <input type="checkbox" onclick="updateCheckbox(this)">Other</label><br>
+            <label>
+                <input type="checkbox" onclick="updateCheckbox(this)">Prefer not to say</label><br><br>
+                  
+                    </tr>
+                    <tr>
+                        <td class="auto-style4" colspan="2">Environmental 
+						concerns</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 267px">Flooding</td>
+                        <td>
+                            <select name="flooding">
+                                <option></option><option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+                            </select></td></tr>
+                    <tr><td style="width: 267px">Wildfires</td>
+                        <td>
+                            <select name="wildfires">
+                                <option></option>
+                                <option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+             </select></td></tr><tr>                        
+                            <td style="width: 267px">Water Shortages</td>
+        <td><select name="water_shortages">
+                                <option></option>
+                                <option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+                            </select>
+         </td></tr><tr><td style="width: 267px">Rising Sea Level</td>
+                        <td><select name="sea_level">
+                                <option></option>
+                                <option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+                            </select>
+         </td></tr><tr><td style="height: 57px; width: 267px">Severe Storms</td>
+                        <td style="height: 57px">
+                            <select name="storms">
+                                <option></option>
+                                <option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+  </select></td></tr><tr><td style="height: 57px; width: 267px">Water Pollution</td>
+                        <td style="height: 57px">
+                            <select name="pollution">
+                                <option></option>
+                                <option>Very worried</option>
+                                <option>Somewhat worried</option>
+                                <option>Not very worried</option>
+                                <option>Not at all worried</option>
+                            </select></td></tr>
+                    <tr><td class="auto-style2" colspan="2" style="height: 57px">
+						<span class="auto-style3" lang="zh-cn">Pesonal actions</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 57px"><span lang="zh-cn">
+						What ways do you know to reduce the carbon footprint? 
+						(Please list one)</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 57px">
+						<input name="way" style="width: 546px; height: 45px" type="text" value=" "></td>
+                    </tr>
+                </table>
+                <div class="auto-style1">
+                    <br><br>
+                    <input type="reset" value="Reset">
+                    <input type="submit" value="Submit">
+           </div></form>
+            <br>
+            <div class="auto-style1">
+                <p>If you have any questions, feel free to contact me at <a href="mailto:liur3@tcd.ie">liur3@tcd.ie</a></p>
+ 
+  </div></div></div>
+</body>
+</html>
